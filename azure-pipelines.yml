@@ -93,7 +93,7 @@ stages:
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
 - stage: 'QA'
   displayName: 'Deploy to QA'
-  dependsOn: Dev
+  dependsOn: Deploy_Dev
   #Sample condition could be as follows but environment QA is set for an approval in Azure DevOps
   #condition: eq(variables['Build.Reason'], 'Schedule')
   jobs:
