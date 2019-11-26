@@ -102,7 +102,7 @@ stages:
       vmImage: 'Ubuntu-16.04'
     environment: QA
     variables:
-    - group: 'Release'
+    - group: 'QA'
     strategy:
       runOnce:
         deploy:
