@@ -109,9 +109,20 @@ stages:
           steps:
           - download: current
             artifact: drop
-          - task: AzureWebApp@1
-            displayName: 'Azure App Service Deploy: website'
+ #         - task: AzureWebApp@1
+ #           displayName: 'Azure App Service Deploy: website'
+ #           inputs:
+ #             azureSubscription: 'Azure Internal Consumption'
+ #             appName: '$(WebAppName)'
+ #             package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
+
+          - task: AzureRmWebAppDeployment@4
             inputs:
+              ConnectionType: 'AzureRM'
               azureSubscription: 'Azure Internal Consumption'
-              appName: '$(WebAppName)'
-              package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
+              appType: 'webAppLinux'
+              WebAppName: '$(WebAppName)'
+              deployToSlotOrASE: true
+              ResourceGroupName: 'customers'
+              SlotName: 'QA'
+              packageForLinux: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
